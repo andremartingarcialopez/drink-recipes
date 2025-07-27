@@ -1,15 +1,21 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useAppStore } from "../stores/useAppStore";
 
 export default function Header() {
 
+    const { fetchCatgories, categories } = useAppStore();
+
+
     const location = useLocation();
-    console.log(location);
 
     const isHomePage = useMemo(() => {
         return location.pathname == "/"
     }, [location.pathname]);
 
+    useEffect(() => {
+        fetchCatgories();
+    }, [fetchCatgories])
 
 
     return (
@@ -44,6 +50,11 @@ export default function Header() {
                             <select className="w-full bg-white p-1 rounded-lg focus:outline-none"
                                 id="category">
                                 <option value="">--Selecciona--</option>
+                                {categories.map(function (category) {
+                                    return (
+                                        <option key={category.strCategory} value={category.strCategory}>{category.strCategory}</option>
+                                    )
+                                })}
                             </select>
                         </div>
 
