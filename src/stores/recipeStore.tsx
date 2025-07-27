@@ -5,6 +5,7 @@ import type { Category, RecipeDetails, RecipeFilterResponse, Search } from "../t
 export type RecipeSliceTypes = {
     categories: Category[],
     recipeDetails: RecipeDetails,
+    modal: boolean
     fetchCatgories: () => void
     fetchRecipeFilter: (search: Search) => void
     recipeFilterResponse: RecipeFilterResponse[]
@@ -15,6 +16,7 @@ export const recipeSlice: StateCreator<RecipeSliceTypes> = (set) => ({
     categories: [],
     recipeFilterResponse: [],
     recipeDetails: {} as RecipeDetails,
+    modal: false,
     fetchCatgories: async () => {
         const result = await getCatgories();
         set((state) => ({
@@ -33,7 +35,8 @@ export const recipeSlice: StateCreator<RecipeSliceTypes> = (set) => ({
         const result = await getRecipeDetails(id);
         set((state) => ({
             ...state,
-            recipeDetails: result
+            recipeDetails: result,
+            modal: true
         }))
     }
 })
