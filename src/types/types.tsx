@@ -40,3 +40,9 @@ export type RecipeDetails = {
     strMeasure9: string,
     strMeasure10: string,
 }
+
+export type Notification = {
+    message: string,
+    error: boolean,
+    show: boolean
+}
