@@ -5,7 +5,7 @@ import type { Search } from "../types/types";
 
 export default function Header() {
 
-    const { fetchCatgories, categories, fetchRecipeFilter } = useAppStore();
+    const { fetchCatgories, categories, fetchRecipeFilter, showNotification } = useAppStore();
     const [search, setSearch] = useState<Search>({
         ingredient: "",
         category: ""
@@ -31,7 +31,11 @@ export default function Header() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (Object.values(search).some(value => value.trim() == "")) {
-            console.log("Todos los campos son obliagtorios");
+            showNotification({
+                message: "Todos los campos son obligatorios",
+                error: true,
+                show: true
+            })
             return
         }
 
