@@ -7,7 +7,7 @@ export default function IndexPage() {
 
     return (
         <div>
-            <h1 className="text-3xl my-5 font-bold text-gray-800">Recetas</h1>
+            <h1 className="text-3xl my-5 font-bold text-gray-800 mx-2">Recetas</h1>
             {recipeFilterResponse.length ?
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {recipeFilterResponse.map((recipe) =>

@@ -8,7 +8,7 @@ type RecipeCardProps = {
 export default function RecipeCard({ recipe }: RecipeCardProps) {
     const {fetchRecipeDetails} = useAppStore()
     return (
-        <div className="p-5 bg-white shadow-2xl rounded-lg ">
+        <div className="p-5 bg-white shadow-2xl rounded-lg m-2">
             <div className="rounded-lg overflow-hidden">
                 <img className="rounded hover:rotate-3 hover:scale-125 hover:transition-transform" src={recipe.strDrinkThumb} alt={`Imagen de ${recipe.idDrink}`} />
             </div>

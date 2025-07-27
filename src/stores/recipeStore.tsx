@@ -10,6 +10,7 @@ export type RecipeSliceTypes = {
     fetchRecipeFilter: (search: Search) => void
     recipeFilterResponse: RecipeFilterResponse[]
     fetchRecipeDetails: (id: RecipeFilterResponse["idDrink"]) => void
+    closeModal: () => void
 }
 
 export const recipeSlice: StateCreator<RecipeSliceTypes> = (set) => ({
@@ -37,6 +38,12 @@ export const recipeSlice: StateCreator<RecipeSliceTypes> = (set) => ({
             ...state,
             recipeDetails: result,
             modal: true
+        }))
+    },
+    closeModal: () => {
+        set(() => ({
+            modal: false,
+            recipeDetails: {} as RecipeDetails
         }))
     }
 })
