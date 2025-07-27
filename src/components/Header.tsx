@@ -1,11 +1,15 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppStore } from "../stores/useAppStore";
+import type { Search } from "../types/types";
 
 export default function Header() {
 
-    const { fetchCatgories, categories } = useAppStore();
-
+    const { fetchCatgories, categories, fetchRecipeFilter } = useAppStore();
+    const [search, setSearch] = useState<Search>({
+        ingredient: "",
+        category: ""
+    })
 
     const location = useLocation();
 
@@ -15,7 +19,24 @@ export default function Header() {
 
     useEffect(() => {
         fetchCatgories();
-    }, [fetchCatgories])
+    }, [fetchCatgories]);
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) {
+        setSearch({
+            ...search,
+            [e.target.id]: e.target.value
+        })
+    }
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        if (Object.values(search).some(value => value.trim() == "")) {
+            console.log("Todos los campos son obliagtorios");
+            return
+        }
+
+        fetchRecipeFilter(search);
+    }
 
 
     return (
@@ -33,22 +54,28 @@ export default function Header() {
                             className={({ isActive }) => isActive ? "uppercase text-gray-800 font-bold" : " text-white font-bold uppercase"}>Favoritos</NavLink>
                     </nav>
                 </div>
+
                 {isHomePage &&
-                    <form className="p-5 bg-white/10 backdrop-blur-xs rounded-lg my-5 md:w-1/2 shadow-2xl border border-slate-100 flex flex-col justify-center items-stretch space-y-3">
+                    <form onSubmit={handleSubmit}
+                        className="p-5 bg-white/10 backdrop-blur-xs rounded-lg my-5 md:w-1/2 shadow-2xl border border-slate-100 flex flex-col justify-center items-stretch space-y-3">
                         <div>
                             <label className="text-white font-bold uppercase"
                                 htmlFor="ingredient">Ingrediente/Nombre</label>
                             <input className="w-full bg-white p-1 rounded-lg focus:outline-none"
                                 placeholder="Ej. Tequila, Vodka, Cafe"
                                 type="text"
-                                id="ingredient" />
+                                id="ingredient"
+                                value={search.ingredient}
+                                onChange={handleChange} />
                         </div>
 
                         <div>
                             <label className="text-white font-bold uppercase"
                                 htmlFor="category">Categorias</label>
                             <select className="w-full bg-white p-1 rounded-lg focus:outline-none"
-                                id="category">
+                                id="category"
+                                value={search.category}
+                                onChange={handleChange}>
                                 <option value="">--Selecciona--</option>
                                 {categories.map(function (category) {
                                     return (
