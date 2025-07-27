@@ -48,7 +48,7 @@ export default function Header() {
 
                     <nav className="flex justify-center items-center gap-2">
                         <NavLink to={"/"}
-                            className={({ isActive }) => isActive ? "uppercase text-gray-800 font-bold" : " text-white font-bold uppercase"}>Inicio</NavLink>
+                            className={({ isActive }) => isActive ? "uppercase text-yellow-500 font-bold" : " text-white font-bold uppercase"}>Inicio</NavLink>
 
                         <NavLink to={"/favorites"}
                             className={({ isActive }) => isActive ? "uppercase text-gray-800 font-bold" : " text-white font-bold uppercase"}>Favoritos</NavLink>
