@@ -1,4 +1,4 @@
-import type { Search } from "../types/types";
+import type { RecipeFilterResponse, Search } from "../types/types";
 
 
 export async function getCatgories() {
@@ -27,5 +27,19 @@ export async function getRecipeFilter(search: Search) {
         return data.drinks
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function getRecipeDetails(id: RecipeFilterResponse["idDrink"]) {
+    try {
+        const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+        const response = await fetch(url);
+        if (response.status !== 200) {
+            throw new Error(`HTTPS Error!! ${response.status}`);
+        }
+        const data = await response.json();
+        return data.drinks[0]
+    } catch (error) {
+        console.log(error);
     }
 }

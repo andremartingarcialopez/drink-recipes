@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body{
+  background-color: rgb(227, 223, 220);
+}
+
 .bg-img {
   background-image: url("drinks-bg.jpg");
   background-position: center;
