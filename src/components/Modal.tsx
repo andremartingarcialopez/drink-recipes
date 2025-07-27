@@ -5,14 +5,13 @@ import type { RecipeDetails } from '../types/types';
 
 export default function Modal() {
 
-    const { modal, recipeDetails, closeModal } = useAppStore();
+    const { modal, recipeDetails, closeModal, handleClickFav, favoriteExist } = useAppStore();
 
     function formatIngredinetsAndMeasure() {
         const ingredientAndMeasure = [];
         for (let i = 1; i <= 10; i++) {
             const ingredient = recipeDetails[`strIngredient${i}` as keyof RecipeDetails];
             const measure = recipeDetails[`strMeasure${i}` as keyof RecipeDetails];
-            console.log(ingredient)
 
             if (ingredient && measure) {
                 ingredientAndMeasure.push(
@@ -64,10 +63,14 @@ export default function Modal() {
                                         <p className='font-light text-lg'>{recipeDetails.strInstructions}</p>
                                     </Dialog.Title>
                                     <div className='flex flex-col md:flex-row justify-between items-stretch gap-3'>
-                                        <button className='text-center w-full bg-yellow-400 hover:bg-yellow-600 p-2 rounded-lg text-white hover:font-semibold uppercase cursor-pointer active:bg-yellow-400'>Agregar a Favoritos</button>
+                                        <button className='text-center w-full bg-yellow-400 hover:bg-yellow-600 p-2 rounded-lg text-white hover:font-semibold uppercase cursor-pointer active:bg-yellow-400'
+                                            onClick={() => {
+                                                handleClickFav(recipeDetails)
+                                                closeModal()
+                                            }}>{favoriteExist(recipeDetails.idDrink) ? "Eliminar de Favoritos" : "Agregar a Favoritos"}</button>
 
                                         <button className='text-center w-full bg-gray-400 hover:bg-gray-600 p-2 rounded-lg text-white hover:font-semibold uppercase cursor-pointer active:bg-gray-400'
-                                        onClick={() => closeModal()}>Cerrar</button>
+                                            onClick={() => closeModal()}>Cerrar</button>
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
