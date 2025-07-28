@@ -11,7 +11,8 @@ export default function Notification() {
     return (
         <div
             aria-live="assertive"
-            className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+            /* Para que la notificacion se vea encima de el bg z-20 */
+            className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 z-20"
         >
             <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
                 <Transition
@@ -31,7 +32,11 @@ export default function Notification() {
                                     {notification.error ? <XCircleIcon className='w-6 h-6 text-red-500' /> : <CheckCircleIcon className='w-6 h-6 text-green-500' />}
                                 </div>
                                 <div className="ml-3 w-0 flex-1 pt-0.5">
-                                    <p className="text-sm font-medium text-gray-900">Confirmacion:</p>
+                                    {notification.error ?
+                                        <p className="text-sm font-medium text-gray-900">ERROR!!</p>
+                                        :
+                                        <p className="text-sm font-medium text-gray-900">Confirmacion:</p>
+                                    }
                                     <p className="mt-1 text-sm text-gray-500">{notification.message}</p>
                                 </div>
                                 <div className="ml-4 flex flex-shrink-0">
