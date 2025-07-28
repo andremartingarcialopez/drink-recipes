@@ -7,6 +7,7 @@ export default function Modal() {
 
     const { modal, recipeDetails, closeModal, handleClickFav, favoriteExist } = useAppStore();
 
+    /*Obtenemos los ingredientes ya que en la API aparecen de forma extraña*/
     function formatIngredinetsAndMeasure() {
         const ingredientAndMeasure = [];
         for (let i = 1; i <= 10; i++) {

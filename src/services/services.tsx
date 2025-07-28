@@ -1,5 +1,6 @@
 import type { RecipeFilterResponse, Search } from "../types/types";
 
+/*Funciones donde hacemos fetch a las APIS */
 
 export async function getCatgories() {
     try {

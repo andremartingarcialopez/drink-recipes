@@ -6,17 +6,19 @@ import type { Search } from "../types/types";
 export default function Header() {
 
     const { fetchCatgories, categories, fetchRecipeFilter, showNotification } = useAppStore();
+
     const [search, setSearch] = useState<Search>({
         ingredient: "",
         category: ""
     })
 
+    /* Pasar saber en que pagina o path estamos */
     const location = useLocation();
-
     const isHomePage = useMemo(() => {
         return location.pathname == "/"
     }, [location.pathname]);
 
+    /*Al iniciar la pagina carga las categorias*/
     useEffect(() => {
         fetchCatgories();
     }, [fetchCatgories]);
@@ -44,9 +46,10 @@ export default function Header() {
 
 
     return (
-        <header className={`${isHomePage ? "bg-img" : "bg-yellow-500/50"} border-b-2 shadow-xl border-yellow-500 p-5`}>
+        /*Para darle el efecto de oscuro al bg */
+        <header className={`${isHomePage ? "bg-img" : "bg-yellow-500/50"} relative z-10 border-b-2 shadow-xl border-yellow-500 p-5`}>
 
-            <div className="mx-auto container">
+            <div className="mx-auto container relative z-10">
                 <div className=" flex flex-col md:flex-row justify-center md:justify-between items-center gap-5 md:gap-0">
                     <img className="w-40" src={isHomePage ? "/logo.png" : "/logoBlack.png"} alt="" />
 

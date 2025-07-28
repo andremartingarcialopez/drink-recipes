@@ -18,6 +18,7 @@ export const recipeSlice: StateCreator<RecipeSliceTypes> = (set) => ({
     recipeFilterResponse: [],
     recipeDetails: {} as RecipeDetails,
     modal: false,
+
     fetchCatgories: async () => {
         const result = await getCatgories();
         set((state) => ({
@@ -43,7 +44,7 @@ export const recipeSlice: StateCreator<RecipeSliceTypes> = (set) => ({
     closeModal: () => {
         set(() => ({
             modal: false,
-            recipeDetails: {} as RecipeDetails
+            recipeDetails: {} as RecipeDetails /*Limpiamos recipeDetails*/
         }))
     }
 })
